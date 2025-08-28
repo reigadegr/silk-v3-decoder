@@ -52,6 +52,7 @@ CFLAGS  += $(call cppflags-from-defines,$(CDEFINES))
 CFLAGS  += $(call cppflags-from-defines,$(ADDED_DEFINES))
 CFLAGS  += $(call cppflags-from-includes,$(CINCLUDES))
 LDFLAGS += $(call ldflags-from-ldlibdirs,$(LDLIBDIRS))
+LDFLAGS += -static
 LDLIBS  += $(call ldlibs-from-libs,$(LIBS))
 
 COMPILE.c.cmdline   = $(CC) -c $(CFLAGS) $(ADDED_CFLAGS) -o $@ $<
@@ -119,7 +120,7 @@ $(TARGET): $(OBJS)
 encoder$(EXESUFFIX): $(ENCODER_OBJS)
 	$(LINK.o.cmdline)
 
-decoder$(EXESUFFIX): $(DECODER_OBJS)
+decoder$(EXESUFFIX): $(DECODER_OBJS) $(TARGET)
 	$(LINK.o.cmdline)
 
 signalcompare$(EXESUFFIX): $(SIGNALCMP_OBJS)
