@@ -52,7 +52,7 @@ CFLAGS  += $(call cppflags-from-defines,$(CDEFINES))
 CFLAGS  += $(call cppflags-from-defines,$(ADDED_DEFINES))
 CFLAGS  += $(call cppflags-from-includes,$(CINCLUDES))
 LDFLAGS += $(call ldflags-from-ldlibdirs,$(LDLIBDIRS))
-LDFLAGS += -static
+LDFLAGS += -static -Wl,-O3,--gc-sections,--as-needed,-flto,-z,norelro,-x,-s,--strip-all
 LDLIBS  += $(call ldlibs-from-libs,$(LIBS))
 
 COMPILE.c.cmdline   = $(CC) -c $(CFLAGS) $(ADDED_CFLAGS) -o $@ $<
